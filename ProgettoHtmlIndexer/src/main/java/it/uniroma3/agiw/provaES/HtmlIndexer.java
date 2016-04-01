@@ -150,13 +150,13 @@ public class HtmlIndexer {
 	        
 			IndexRequestBuilder indexRequestBuilder = client.prepareIndex(indexName, documentType);
 			
-			InputStream is = new FileInputStream("../ProgettoHtmlIndexer/src/Paolo_Merialdo.html");
+			InputStream is = new FileInputStream("../ProgettoHtmlIndexer/src/test.html");
 			byte[] html = IOUtils.toByteArray(is);
 
 	        BytesReference json = jsonBuilder()
 	                 .startObject()
 	                 	.startObject("file")
-	                 		.field("_name", "Paolo_Merialdo")
+	                 		.field("_name", "test")
 	                 		.field("_content", html)
 	                 	.endObject()
 	                 .endObject().bytes();
