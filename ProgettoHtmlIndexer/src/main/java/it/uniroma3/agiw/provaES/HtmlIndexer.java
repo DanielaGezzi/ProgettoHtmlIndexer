@@ -156,7 +156,7 @@ public class HtmlIndexer {
 	        BytesReference json = jsonBuilder()
 	                 .startObject()
 	                 	.startObject("file")
-	                 		.field("_name", "testtest")
+	                 		.field("_name", "test")
 	                 		.field("_content", html)
 	                 	.endObject()
 	                 .endObject().bytes();
