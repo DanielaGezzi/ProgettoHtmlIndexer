@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.pdfbox.io.IOUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
@@ -146,11 +148,11 @@ public class HtmlIndexer {
 	        final CreateIndexResponse createResponse = createIndexRequestBuilder.execute().actionGet();
 			System.out.println(createResponse.toString());
 	        
-	    //ADD DOCUMENT
-	        
 			IndexRequestBuilder indexRequestBuilder = client.prepareIndex(indexName, documentType);
-			
-			InputStream is = new FileInputStream("../ProgettoHtmlIndexer/src/test.html");
+
+	    /*ADD SINGLE DOCUMENT
+	        			
+			InputStream is = new FileInputStream("../ProgettoHtmlIndexer/src/resourceshtml/test.html");
 			byte[] html = IOUtils.toByteArray(is);
 
 	        BytesReference json = jsonBuilder()
@@ -165,7 +167,39 @@ public class HtmlIndexer {
 	        IndexResponse response = indexRequestBuilder.execute().actionGet();	
 	        
 	        System.out.println(response.toString());
-	}
+	     */
+	    //ADD ALL DOC IN A FOLDER
+	        
+	        Files.walk(Paths.get("../ProgettoHtmlIndexer/src/resourceshtml")).forEach(filePath -> {
+	    	    if (Files.isRegularFile(filePath)) {
+	    	    	
+	    	    	try{
+	    	    		
+		    	        InputStream is = new FileInputStream(filePath.toString());
+		    	        byte[] html = IOUtils.toByteArray(is);
+		    	    	
+		    	   
+		    	        BytesReference json = jsonBuilder()
+		    	                 .startObject()
+		    	                 	.startObject("file")
+		    	                 		.field("_name", filePath.getFileName())
+		    	                 		.field("_content", html)
+		    	                 	.endObject()
+		    	                 .endObject().bytes();
+		    	    	
+		    	        indexRequestBuilder.setSource(json);
+	    	    	}catch(Exception e){
+	    	    		
+	    	    		e.printStackTrace();
+	    	    	}
+	    	    	
+	    	        IndexResponse response = indexRequestBuilder.execute().actionGet();	
+	    	        
+	    	        System.out.println(response.toString());
+	    	    }
+	        });
 	
 
+	}
 }
+
