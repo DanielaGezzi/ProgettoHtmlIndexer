@@ -135,7 +135,7 @@ public class HtmlIndexer {
 	        
 			IndexRequestBuilder indexRequestBuilder = client.prepareIndex(indexName, documentType);
 			
-			InputStream is = new FileInputStream("C:\\Users\\Daniela\\Desktop\\Paolo_Merialdo.html");
+			InputStream is = new FileInputStream("C:\\Users\\Daniela\\Documents\\gitAGIWindexer\\ProgettoHtmlIndexer\\src\\Paolo_Merialdo.html");
 			byte[] html = IOUtils.toByteArray(is);
 
 	        BytesReference json = jsonBuilder()
