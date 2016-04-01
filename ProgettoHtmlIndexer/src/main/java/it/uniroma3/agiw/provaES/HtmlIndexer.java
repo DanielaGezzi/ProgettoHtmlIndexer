@@ -51,7 +51,7 @@ public class HtmlIndexer {
 		
 			final Client client = getClient();
 			final String indexName = "agiwtest"; 
-	        final String documentType = "htmltest";
+			final String documentType = "htmltest";
 	        
 	        final IndicesExistsResponse res = client.admin().indices().prepareExists(indexName).execute().actionGet();
 	        if (res.isExists()) {
@@ -147,9 +147,9 @@ public class HtmlIndexer {
 	                 .endObject().bytes();
 	        
 	        indexRequestBuilder.setSource(json);
-			IndexResponse response = indexRequestBuilder.execute().actionGet();	
+	        IndexResponse response = indexRequestBuilder.execute().actionGet();	
 	        
-			System.out.println(response.toString());
+	        System.out.println(response.toString());
 	}
 	
 
