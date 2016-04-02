@@ -77,6 +77,7 @@ public class HtmlIndexer {
 	        						.field("type", "attachment")
 	        						.startObject("fields")
 		        						.startObject("content")
+		        							.field("store", "no")
 	    									.field("analyzer", "ShingleAnalyzer")
 	    								.endObject()
 	    								.startObject("name")
@@ -182,7 +183,8 @@ public class HtmlIndexer {
 		    	        BytesReference json = jsonBuilder()
 		    	                 .startObject()
 		    	                 	.startObject("file")
-		    	                 		.field("_name", filePath.getFileName())
+		    	                 		.field("_content_type", "application/html")
+		    	                 		.field("_name", filePath.toString())
 		    	                 		.field("_content", html)
 		    	                 	.endObject()
 		    	                 .endObject().bytes();
