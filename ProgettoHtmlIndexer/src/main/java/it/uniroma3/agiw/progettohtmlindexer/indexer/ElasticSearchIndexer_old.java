@@ -24,10 +24,10 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 
-public class ElasticSearchIndexer {
+public class ElasticSearchIndexer_old {
 	
 
-	public ElasticSearchIndexer(){
+	public ElasticSearchIndexer_old(){
 		super();
 	}
 	
