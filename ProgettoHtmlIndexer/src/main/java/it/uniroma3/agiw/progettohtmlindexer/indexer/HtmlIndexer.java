@@ -1,4 +1,4 @@
-package it.uniroma3.agiw.provaES;
+package it.uniroma3.agiw.progettohtmlindexer.indexer;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
