@@ -5,10 +5,58 @@ import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+/**
+ * Questa classe si occupa di estrarre il testo da un documento html
+ * 
+ * @author JavaComeLava
+ *
+ */
+
 public class HtmlExtractor {
+	
+	/**
+	 * Restituisce il contenuto testuale della pagina esclusi i link (mantenendo
+	 * però il contenuto dei link href)
+	 * 
+	 * @param fileHtml -> file html
+	 *            
+	 * @return La stringa del contenuto senza i tag html e i link
+	 */
+	public String extractContentWithoutLink(File fileHtml){
+		
+		String content = "";
+			/*dal file prendo il contenuto del tag <body> 
+			 *rimuovo i link mantenendo però il contenuto dell href
+			 *rimuovo i tag html
+			 *salvo sotto forma di stringa e return
+			  */
+		
+		return content;
+	};
+	
+	/**
+	 * Restuituisce il titolo del documento html
+	 * 
+	 * @param fileHtml -> file html
+	 *           
+	 * @return Una stringa rappresentante il titolo o null se il tag title non è
+	 *         presente
+	 */
+	public String extractTitle(File fileHtml) {
+		
+		String title = "";
+		/*dal file prendo il contenuto del tag <title> 
+		 *salvo sotto forma di stringa e return
+		  */
+	
+	return title;
+		
+	}
+	
+	
+	
 	
 	public static void parseFile(String inputHtmlFile) throws IOException{
 		
