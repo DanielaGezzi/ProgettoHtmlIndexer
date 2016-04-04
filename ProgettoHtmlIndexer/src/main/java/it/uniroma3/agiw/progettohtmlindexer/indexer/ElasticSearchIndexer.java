@@ -24,7 +24,7 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 
-public class HtmlIndexer {
+public class ElasticSearchIndexer {
 	
 
 	private static Client getClient(){

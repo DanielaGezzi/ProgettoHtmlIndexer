@@ -1,4 +1,4 @@
-package it.uniroma3.agiw.progettohtmlindexer.indexer;
+package it.uniroma3.agiw.progettohtmlindexer.textExtractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class HtmlParser {
+public class HtmlExtractor {
 	
 	public static void parseFile(String inputHtmlFile) throws IOException{
 		
