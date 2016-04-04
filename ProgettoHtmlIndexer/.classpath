@@ -22,26 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/bcmail-jdk15on-1.52.jar"/>
-	<classpathentry kind="lib" path="lib/bcpkix-jdk15on-1.52.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-jdk15on-1.52.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="lib/commons-compress-1.10.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="lib/fontbox-1.8.10.jar"/>
-	<classpathentry kind="lib" path="lib/jempbox-1.8.10.jar"/>
-	<classpathentry kind="lib" path="lib/juniversalchardet-1.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/mapper-attachments-2.3.0.jar"/>
-	<classpathentry kind="lib" path="lib/pdfbox-1.8.10.jar"/>
-	<classpathentry kind="lib" path="lib/poi-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/poi-scratchpad-3.13.jar"/>
-	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/tagsoup-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/tika-core-1.11.jar"/>
-	<classpathentry kind="lib" path="lib/tika-parsers-1.11.jar"/>
-	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ElasticPlugins"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
