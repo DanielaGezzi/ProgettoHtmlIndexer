@@ -27,7 +27,11 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 public class ElasticSearchIndexer {
 	
 
-	private static Client getClient(){
+	public ElasticSearchIndexer(){
+		super();
+	}
+	
+	private Client getClient(){
 			
 			Settings settings = Settings.settingsBuilder()
 					.put("cluster.name", "elasticsearch").build();
@@ -50,7 +54,7 @@ public class ElasticSearchIndexer {
 	}
 	
 	
-	public static void main(final String[] args) throws IOException, InterruptedException {
+	public void index() throws IOException, InterruptedException {
 		
 			final Client client = getClient();
 			final String indexName = "agiwtest"; 
