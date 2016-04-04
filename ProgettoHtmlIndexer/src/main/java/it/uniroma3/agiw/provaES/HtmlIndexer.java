@@ -9,7 +9,7 @@ import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.pdfbox.io.IOUtils;
+import org.apache.tika.io.IOUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequestBuilder;
@@ -49,13 +49,16 @@ public class HtmlIndexer {
 			return (Client) transportClient;
 	}
 	
+	
 	public static void main(final String[] args) throws IOException, InterruptedException {
 		
 			final Client client = getClient();
 			final String indexName = "agiwtest"; 
 			final String documentType = "htmltest";
 	        
-	        final IndicesExistsResponse res = client.admin().indices().prepareExists(indexName).execute().actionGet();
+	        final IndicesExistsResponse res = 
+	        		client.admin().indices().prepareExists(indexName).execute().actionGet();
+	        
 	        if (res.isExists()) {
 	            final DeleteIndexRequestBuilder delIdx = client.admin().indices().prepareDelete(indexName);
 	            delIdx.execute().actionGet();
@@ -104,9 +107,9 @@ public class HtmlIndexer {
 	        final XContentBuilder settingsBuilder = XContentFactory.jsonBuilder()
 	        		.startObject()
 	                .startObject("analysis")
-	                	.startObject("char_filter") //rimuove tag html
+	                	.startObject("char_filter") 
 	                		.startObject("filter_html")
-	                			.field("type", "html_strip")
+	                			.field("type", "html_strip") //rimuove tag html
 	                		.endObject()
 	                	.endObject()
 	                    .startObject("filter")
