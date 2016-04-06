@@ -1,14 +1,23 @@
 package it.uniroma3.agiw.progettohtmlindexer.main;
 
 import java.io.IOException;
+
+import it.uniroma3.agiw.progettohtmlindexer.indexer.ElasticSearchIndexer;
+import it.uniroma3.agiw.progettohtmlindexer.model.ParsedResult;
 import it.uniroma3.agiw.progettohtmlindexer.parser.DownloadFromS3;
 
 public class StartElastic {
 
 	public static void main(String[] args) throws IOException, InterruptedException{
-		
 		DownloadFromS3 download = new DownloadFromS3();
 		download.Download();
+	}
+
+	public void indexer(String content,String url,String query,String title) throws IOException, InterruptedException{
+		
+		ParsedResult result = new ParsedResult(content,url,query,title);
+		ElasticSearchIndexer ESIndexer = new ElasticSearchIndexer();		
+		ESIndexer.index(result);
 		
 //		ElasticSearchIndexer esi = new ElasticSearchIndexer();
 //		ParsedResult pr = new ParsedResult();
@@ -43,5 +52,4 @@ public class StartElastic {
 //			e.printStackTrace();
 //		}	
 	}
-
 }

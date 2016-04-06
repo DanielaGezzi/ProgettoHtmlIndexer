@@ -21,6 +21,7 @@ import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
+import it.uniroma3.agiw.progettohtmlindexer.main.StartElastic;
 import it.uniroma3.agiw.progettohtmlindexer.model.ParsedResult;
 
 public class DownloadFromS3 {
@@ -87,9 +88,8 @@ public class DownloadFromS3 {
 		/*Prendere il titolo della pagina da JSOUP*/
 		Document doc = Jsoup.connect(url).get();
 		Elements body = doc.getElementsByTag("title");
-		ParsedResult d = new ParsedResult (content,url,query,body.text());
-		DocumentParser p = new DocumentParser();
-		p.parseFile(d);		
+		StartElastic elastic = new StartElastic();
+		elastic.indexer(content, url, query, body.text());
 	}
 }
 
