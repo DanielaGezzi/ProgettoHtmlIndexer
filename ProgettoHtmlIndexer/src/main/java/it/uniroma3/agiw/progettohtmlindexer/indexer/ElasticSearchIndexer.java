@@ -9,7 +9,7 @@ import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.apache.tika.io.IOUtils;
+//import org.apache.tika.io.IOUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequestBuilder;
@@ -147,8 +147,8 @@ public class ElasticSearchIndexer {
 	                    .startObject("analyzer")
 	                        .startObject("CustomAnalyzer")
 	                            .field("tokenizer","my_tokenizer")
-	                            .array("filter","standard","lowercase",/*,"asciifolding",*/"filter_stemmer",
-	                            		/*"filter_shingle"*/"filter_stop","filter_elision")
+	                            .array("filter","standard","lowercase","asciifolding","filter_stemmer",
+	                            		"filter_shingle","filter_stop","filter_elision")
 	                            //.field("char_filter", "filter_html")
 	                        .endObject()
 	                    .endObject()
