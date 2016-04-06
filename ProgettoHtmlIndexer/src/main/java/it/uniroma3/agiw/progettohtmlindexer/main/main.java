@@ -3,6 +3,7 @@ package it.uniroma3.agiw.progettohtmlindexer.main;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import it.uniroma3.agiw.progettohtmlindexer.indexer.ElasticProva;
 import it.uniroma3.agiw.progettohtmlindexer.indexer.ElasticSearchIndexer;
 import it.uniroma3.agiw.progettohtmlindexer.model.ParsedResult;
 
@@ -26,8 +27,10 @@ public class main {
 				+ " rossa come il sangue e dai capelli neri come l’ebano; e la chiamarono Biancaneve. "
 				+ "E quando nacque, la regina morì.";
 				
-				byte ptext[] = myString.getBytes();
+				String value = new String(myString.getBytes("UTF-8"), "UTF-8");
+				/*byte ptext[] = myString.getBytes();
 				String value = new String(ptext, "UTF-8");
+				System.out.println(value);*/
 				
 		pr.setContent(value);
 		
@@ -43,6 +46,17 @@ public class main {
 			e.printStackTrace();
 		}
 		
+		/*
+		ElasticProva ep = new ElasticProva();
+		try {
+			ep.index();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 	}
 

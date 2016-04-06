@@ -35,7 +35,7 @@ public class ElasticSearchIndexer {
 		super();
 	}
 	
-	private Client getClient(){
+	public Client getClient(){
 			
 			Settings settings = Settings.settingsBuilder()
 					.put("cluster.name", "elasticsearch").build();
@@ -110,18 +110,12 @@ public class ElasticSearchIndexer {
 	        final XContentBuilder settingsBuilder = XContentFactory.jsonBuilder()
 	        		.startObject()
 	                .startObject("analysis")
-	                	.startObject("char_filter") 
+	                	/*.startObject("char_filter") 
 	                		.startObject("filter_html")
 	                			.field("type", "html_strip") //rimuove tag html
 	                		.endObject()
-	                	.endObject()
+	                	.endObject()*/
 	                    .startObject("filter")
-	                        .startObject("filter_shingle")
-	                            .field("type","shingle")
-	                            .field("max_shingle_size",2)
-	                            .field("min_shingle_size",2)
-	                            .field("output_unigrams",false)
-	                        .endObject()
 	                        .startObject("filter_elision")
 	                        	.field("type","elision")
 	                        	.array("articles",
@@ -137,18 +131,30 @@ public class ElasticSearchIndexer {
 	                        .startObject("filter_stop")
 	                        	.field("type","stop")
 	                        	.field("stopwords","_italian_")
+	                        	.field("ignore_case", true)
                             .endObject()
+                            .startObject("filter_snowball")
+	                        	.field("type","snowball")
+	                        	.field("language","Italian")
+                        	.endObject()
+                        	.startObject("filter_worddelimiter")
+	                        	.field("type","word_delimiter")
+                        	.endObject()
 	                    .endObject()
 	                    .startObject("tokenizer")
 	                        .startObject("my_tokenizer")
-	                            .field("type","letter")
+	                            .field("type","ngram")
+	                            .field("min_gram",5)
+	                            .field("max_gram",20)
+	                            .array("token_char", "letter", "digit")
 	                        .endObject()
 	                    .endObject()
 	                    .startObject("analyzer")
 	                        .startObject("CustomAnalyzer")
+                        		.field("type", "custom")
 	                            .field("tokenizer","my_tokenizer")
-	                            .array("filter","standard","lowercase",/*,"asciifolding",*/"filter_stemmer",
-	                            		/*"filter_shingle"*/"filter_stop","filter_elision")
+	                            .array("filter","standard","lowercase","asciifolding",
+	                            		"filter_stop","filter_snowball")
 	                            //.field("char_filter", "filter_html")
 	                        .endObject()
 	                    .endObject()
