@@ -10,6 +10,8 @@ import org.jsoup.select.Elements;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -27,8 +29,13 @@ public class DownloadFromS3 {
 	private static String prefix = "dataset0/"; //Abbiamo diversi dataset per ora
 		
 	public void Download() throws IOException, InterruptedException {
-	        
-		AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
+	    
+        AWSCredentials credentials = new BasicAWSCredentials(
+				"AKIAJIGUFYU6GAH3IOBQ", 
+				"D9XT2gtzXmQHxPKPyw7EeLrNiG4ieXOOVnx+WC/g");
+		
+		AmazonS3 s3client = new AmazonS3Client(credentials);
+//		AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
 		try{
 			ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
 					.withBucketName(bucketName)

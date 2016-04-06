@@ -35,7 +35,7 @@ public class ElasticSearchIndexer {
 		super();
 	}
 	
-	private Client getClient(){
+	public Client getClient(){
 			
 			Settings settings = Settings.settingsBuilder()
 					.put("cluster.name", "elasticsearch").build();
