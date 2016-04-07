@@ -11,13 +11,10 @@ public class ParsedResult {
 	private String url;
 	private String title;
 	private String content;
-	private String query;
-//	private String language; vogliamo inserirlo?
 	
-	public ParsedResult(String content, String url, String query, String title){
+	public ParsedResult(String url, String title, String content){
 		this.content = content;
 		this.url = url;
-		this.query = query;
 		this.title = title;
 	}
 	
@@ -41,14 +38,6 @@ public class ParsedResult {
 		this.content = content;
 	}
 	
-	public String getQuery() {
-		return query;
-	}
-
-	public void setQuery(String query) {
-		this.query = query;
-	}
-
 	public String getTitle() {
 		return title;
 	}

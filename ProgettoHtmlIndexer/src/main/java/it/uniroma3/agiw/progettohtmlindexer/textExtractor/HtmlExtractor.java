@@ -1,11 +1,13 @@
 package it.uniroma3.agiw.progettohtmlindexer.textExtractor;
 
-import java.io.File;
 import java.io.IOException;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import it.uniroma3.agiw.progettohtmlindexer.model.ParsedResult;
 
 /**
  * Questa classe si occupa di estrarre il testo da un documento html
@@ -17,68 +19,37 @@ import org.jsoup.select.Elements;
 public class HtmlExtractor {
 	
 	/**
-	 * Restituisce il contenuto testuale della pagina esclusi i link (mantenendo
-	 * però il contenuto dei link href)
+	 * Restituisce l'oggetto ParsedResult i cui campi sono l'url, il titolo ed il 
+	 * content della pagina
 	 * 
-	 * @param fileHtml -> file html
+	 * @param url della pagina di interesse
 	 *            
-	 * @return La stringa del contenuto senza i tag html e i link
+	 * @return L'oggetto ParsedResult
+	 * @throws IOException 
 	 */
-	public String extractContentWithoutLink(File fileHtml){
-		
-		String content = "";
-			/*dal file prendo il contenuto del tag <body> 
-			 *rimuovo i link mantenendo però il contenuto dell href
-			 *rimuovo i tag html
-			 *salvo sotto forma di stringa e return
-			  */
-		
-		return content;
-	};
-	
-	/**
-	 * Restuituisce il titolo del documento html
-	 * 
-	 * @param fileHtml -> file html
-	 *           
-	 * @return Una stringa rappresentante il titolo o null se il tag title non è
-	 *         presente
-	 */
-	public String extractTitle(File fileHtml) {
-		
-		String title = "";
-		/*dal file prendo il contenuto del tag <title> 
-		 *salvo sotto forma di stringa e return
-		  */
-	
-	return title;
-		
-	}
-	
-	
-	
-	
-	public static void parseFile(String inputHtmlFile) throws IOException{
-		
-//		File file = new File(inputHtmlFile);		
-//		Document doc = Jsoup.parse(file, "UTF-8", "");	
-//		Element eMETA = doc.select("META").first();
-//		System.out.println(eMETA.toString());
-		
-		/*1- Prendere un oggetto da S3, da questo estrapolare l'url dal campo metadata e richiamare
-		 * il metodo di JSOUP*/
-		Document doc = Jsoup.connect("http://en.wikipedia.org/").get();
-		Elements body = doc.getElementsByTag("body");
-		/*2- Creare un oggetto che rappresenta la pagina, le cui variabili sono il nome e cognome(preso
-		 * dal nome del file di S3), url, titolo e contenuto della pagina*/
-		System.out.println(body.text());
-		/*3- Per ogni oggetto che abbiamo creato, facciamo partire l'indicizzazione*/
+	public ParsedResult extractContentWithoutLink(String url) throws IOException{
 
-	}
-
-	public static void main(String[] args) throws IOException{
+		ParsedResult result = null;
+		System.out.println("url:"+url);
+		try{
+			Document doc = Jsoup.connect(url).followRedirects(true).ignoreHttpErrors(true).get();
+			Elements title = doc.getElementsByTag("title");
+			Elements content = doc.getElementsByTag("body");
+			String encTitle = new String(title.text().getBytes("UTF-8"), "UTF-8");
+			String encContent = new String(content.text().getBytes("UTF-8"), "UTF-8");
+			String encUrl = new String(url.getBytes("UTF-8"), "UTF-8");
+			
+			System.out.println("TITLE : "+encTitle);
+			System.out.println("URL : "+encUrl);
+			System.out.println("CONTENT : "+encContent);
+			
+			result = new ParsedResult(encUrl,encTitle,encContent);
+			
+		}catch(HttpStatusException x){
+			System.out.println(x.getStatusCode());
+		}
 		
-		parseFile("../ProgettoHtmlIndexer/src/resourceshtml/test.html");
-		
+		return result;
 	}
+	
 }
