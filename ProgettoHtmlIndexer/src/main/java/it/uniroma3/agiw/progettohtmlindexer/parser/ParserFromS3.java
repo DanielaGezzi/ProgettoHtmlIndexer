@@ -87,7 +87,7 @@ public class ParserFromS3 {
 		ElasticSearchIndexer indexer = new ElasticSearchIndexer();
 		ParsedResult result = null;
 
-		BufferedReader br = new BufferedReader(new FileReader("../ProgettoHtmlIndexer/src/provaUrl.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("../ProgettoHtmlIndexer/src/listaResults.txt"));
     	while ((url = br.readLine()) != null) {
     		result = extractor.extractContentWithoutLink(url);
     		indexer.index(result);
