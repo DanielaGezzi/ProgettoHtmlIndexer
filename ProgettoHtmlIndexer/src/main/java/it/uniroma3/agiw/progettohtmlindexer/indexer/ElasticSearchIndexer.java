@@ -29,7 +29,7 @@ public class ElasticSearchIndexer {
 		super();
 	}
 	
-	public Client getClient(){
+	private Client getClient(){
 			
 			Settings settings = Settings.settingsBuilder()
 					.put("cluster.name", "elasticsearch").build();
@@ -61,11 +61,8 @@ public class ElasticSearchIndexer {
 	        final IndicesExistsResponse res = 
 	        		client.admin().indices().prepareExists(indexName).execute().actionGet();
 	        
-	        if (res.isExists()) {
-	            final DeleteIndexRequestBuilder delIdx = client.admin().indices().prepareDelete(indexName);
-	            delIdx.execute().actionGet();
-	        }
-
+	        if (!res.isExists()) {
+	            
 	        final CreateIndexRequestBuilder createIndexRequestBuilder = client.admin().indices().prepareCreate(indexName);
 			
 	     // MAPPING 
@@ -159,9 +156,11 @@ public class ElasticSearchIndexer {
 	        System.out.println(settingsBuilder.string());
 	        createIndexRequestBuilder.setSettings(settingsBuilder);
 		// ANALYZER DONE
-	        
+	    // CREATE INDEX   
 	        final CreateIndexResponse createResponse = createIndexRequestBuilder.execute().actionGet();
 			System.out.println(createResponse.toString());
+		// DONE	
+	        }
 	        
 			IndexRequestBuilder indexRequestBuilder = client.prepareIndex(indexName, documentType);
 	        
