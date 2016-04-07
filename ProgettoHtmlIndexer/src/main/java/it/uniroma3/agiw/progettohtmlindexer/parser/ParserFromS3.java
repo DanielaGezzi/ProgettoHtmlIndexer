@@ -90,8 +90,8 @@ public class ParserFromS3 {
 		BufferedReader br = new BufferedReader(new FileReader("../ProgettoHtmlIndexer/src/listaResults.txt"));
     	while ((url = br.readLine()) != null) {
     		result = extractor.extractContentWithoutLink(url);
-    		if(result!=null)
-    			indexer.index(result);
+    		if(result != null){
+    			indexer.index(result);}
     	}
     	br.close();	
 	}

@@ -161,7 +161,7 @@ public class ElasticSearchIndexer {
 			System.out.println(createResponse.toString());
 		// DONE	
 	        }
-	        
+	       
 			IndexRequestBuilder indexRequestBuilder = client.prepareIndex(indexName, documentType);
 	        
 			Gson input = new Gson();
