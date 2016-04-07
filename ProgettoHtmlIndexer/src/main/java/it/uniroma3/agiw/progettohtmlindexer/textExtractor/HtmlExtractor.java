@@ -32,7 +32,10 @@ public class HtmlExtractor {
 		ParsedResult result = new ParsedResult();
 		System.out.println("url:"+url);
 		try{
-			Document doc = Jsoup.connect(url).followRedirects(true).ignoreHttpErrors(true).get();
+			Document doc = Jsoup.connect(url).validateTLSCertificates(false)
+											 .followRedirects(true)
+											 .ignoreHttpErrors(true)
+											 .get();
 			Elements title = doc.getElementsByTag("title");
 			Elements content = doc.getElementsByTag("body");
 			String encTitle = new String(title.text().getBytes("UTF-8"), "UTF-8");
