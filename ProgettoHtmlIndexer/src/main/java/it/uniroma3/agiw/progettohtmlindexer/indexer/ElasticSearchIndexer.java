@@ -7,7 +7,6 @@ import java.net.InetAddress;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
@@ -55,7 +54,7 @@ public class ElasticSearchIndexer {
 	public void index(ParsedResult parsedRes) throws IOException, InterruptedException {
 		
 			final Client client = getClient();
-			final String indexName = "agiw"; 
+			final String indexName = "agiw2"; 
 			final String documentType = "html";
 	        
 	        final IndicesExistsResponse res = 
@@ -70,6 +69,9 @@ public class ElasticSearchIndexer {
 	        final XContentBuilder mappingBuilder = jsonBuilder()
 	        		.startObject()
 	        			.startObject(documentType)
+	        				.startObject("_timestamp")
+	        					.field("enabled", true)
+	        				.endObject()
 	        				.startObject("properties")
 		        				.startObject("url")
 		        					.field("type", "string")

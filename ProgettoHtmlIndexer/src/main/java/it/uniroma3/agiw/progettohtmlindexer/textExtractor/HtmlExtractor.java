@@ -29,7 +29,7 @@ public class HtmlExtractor {
 	 */
 	public ParsedResult extractContentWithoutLink(String url) throws IOException{
 
-		ParsedResult result = new ParsedResult();
+		ParsedResult result = null;
 		System.out.println("url:"+url);
 		try{
 			Document doc = Jsoup.connect(url).validateTLSCertificates(false)
@@ -46,6 +46,7 @@ public class HtmlExtractor {
 			System.out.println("URL : "+encUrl);
 			System.out.println("CONTENT : "+encContent);
 			
+			result = new ParsedResult();
 			result.setUrl(encUrl);
 			result.setContent(encContent);
 			result.setTitle(encTitle);
