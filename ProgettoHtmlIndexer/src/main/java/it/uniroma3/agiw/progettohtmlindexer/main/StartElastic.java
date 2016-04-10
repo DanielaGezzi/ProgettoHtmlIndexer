@@ -7,8 +7,8 @@ import it.uniroma3.agiw.progettohtmlindexer.parser.ParserFromS3;
 public class StartElastic {
 
 	public static void main(String[] args) throws IOException, InterruptedException{
-		ParserFromS3 download = new ParserFromS3();
+		ParserFromS3 parser = new ParserFromS3();
 //		download.Download();
-		download.parsePageFromUrl();
+		parser.parsePageFromUrl();
 	}	
 }
