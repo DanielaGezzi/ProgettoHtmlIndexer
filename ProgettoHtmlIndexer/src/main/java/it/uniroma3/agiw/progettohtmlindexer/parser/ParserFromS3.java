@@ -29,8 +29,8 @@ public class ParserFromS3 {
 	public void Download() throws IOException, InterruptedException {
 	    
         AWSCredentials credentials = new BasicAWSCredentials(
-				"AKIAJIGUFYU6GAH3IOBQ", 
-				"D9XT2gtzXmQHxPKPyw7EeLrNiG4ieXOOVnx+WC/g");
+				"*", 
+				"*");
 		
 		AmazonS3 s3client = new AmazonS3Client(credentials);
 		
@@ -88,10 +88,12 @@ public class ParserFromS3 {
 		ParsedResult result = null;
 
 		BufferedReader br = new BufferedReader(new FileReader("../ProgettoHtmlIndexer/src/listaResults.txt"));
-    	while ((url = br.readLine()) != null) {
+    	int i = 0;
+		while ((url = br.readLine()) != null && i<500) {
     		result = extractor.extractContentWithoutLink(url);
     		if(result != null){
     			indexer.index(result);}
+    		i++;
     	}
     	br.close();	
 	}
