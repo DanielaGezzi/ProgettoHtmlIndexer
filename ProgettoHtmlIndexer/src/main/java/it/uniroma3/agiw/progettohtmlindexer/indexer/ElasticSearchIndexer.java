@@ -86,6 +86,12 @@ public class ElasticSearchIndexer {
 		        					.field("type", "string")
 		        					.field("store", "no")
 		        					.field("analyzer", "CustomAnalyzer")
+		        					.startObject("fields")
+		        						.startObject("suggest")
+		        							.field("type", "string")
+		        							.field("analyzer", "CustomAnalyzerSuggest")
+		        						.endObject()
+		        					.endObject()
 		        				.endObject()
 		        			.endObject()
 	        			.endObject()
@@ -97,8 +103,7 @@ public class ElasticSearchIndexer {
 	     // MAPPING DONE
 	        
 	     /* ANALYZER 
-	      * NB:per ora ho usato filter, tokenizer, etc del codice da cui ho preso ispirazione 
-	      * ma ce ne sono una valanga, bisogna decidere ql usare
+	      * 
 	      */
 	        final XContentBuilder settingsBuilder = XContentFactory.jsonBuilder()
 	        		.startObject()
@@ -134,6 +139,11 @@ public class ElasticSearchIndexer {
                             	.field("min_gram", 2)
                             	.field("max_gram", 20)
                             .endObject()
+                            .startObject("filter_shingle")
+                            	.field("type", "shingle")
+                            	.field("min_shingle_size", 2)
+                            	.field("max_shingle_size", 5)
+                            .endObject()
 	                    .endObject()
 	                    .startObject("tokenizer")
 	                        .startObject("my_tokenizer")
@@ -147,8 +157,15 @@ public class ElasticSearchIndexer {
 	                        .startObject("CustomAnalyzer")
 	                        	.field("type", "custom")
 	                            .field("tokenizer","standard")
-	                            .array("filter","standard","lowercase","asciifolding", "filter_ngram","filter_stemmer",
+	                            .array("filter","standard","lowercase","asciifolding","filter_stemmer",
 	                            		"filter_stop","filter_elision","filter_worddelimiter")
+	                            .field("char_filter", "filter_html")
+	                        .endObject()
+	                        .startObject("CustomAnalyzerSuggest")
+		                        .field("type", "custom")
+	                            .field("tokenizer","standard")
+	                            .array("filter","standard","lowercase","asciifolding", "filter_ngram","filter_stemmer",
+	                            		"filter_stop","filter_elision","filter_worddelimiter", "filter_shingle")
 	                            .field("char_filter", "filter_html")
 	                        .endObject()
 	                    .endObject()
